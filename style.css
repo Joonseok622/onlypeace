@@ -1,1 +1,139 @@
-/* Add styles here */
+body {
+    font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    transition: background-color 0.4s, color 0.4s;
+    background-color: #f0f2f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    width: 90%;
+    margin: 20px;
+    padding: 40px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+.dark-mode {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+.dark-mode .container {
+    background-color: #2d2d2d;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+h1 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    word-break: keep-all;
+}
+
+.dark-mode h1 {
+    color: #ecf0f1;
+}
+
+p {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #7f8c8d;
+}
+
+.dark-mode p {
+    color: #bdc3c7;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+#generator-btn {
+    background-color: #4CAF50;
+    color: white;
+    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+}
+
+#generator-btn:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(76, 175, 80, 0.4);
+}
+
+#generator-btn:active {
+    transform: translateY(0);
+}
+
+#toggle-theme-btn {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.dark-mode #toggle-theme-btn {
+    background-color: #4a4a4a;
+    color: #fff;
+}
+
+#toggle-theme-btn:hover {
+    background-color: #d0d0d0;
+}
+
+.dark-mode #toggle-theme-btn:hover {
+    background-color: #5a5a5a;
+}
+
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    min-height: 70px; /* 공간 확보 */
+}
+
+.result-number {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 800;
+    border-radius: 50%;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
