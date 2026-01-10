@@ -202,6 +202,30 @@ async function predict() {
     // Sort predictions by probability (descending)
     prediction.sort((a, b) => b.probability - a.probability);
 
+    // Get the highest probability result
+    const bestPrediction = prediction[0];
+    const bestClassNameRaw = bestPrediction.className.trim().toLowerCase();
+    let bestClassNameLocalized = bestPrediction.className;
+
+    if (animalTranslations[currentLang] && animalTranslations[currentLang][bestClassNameRaw]) {
+        bestClassNameLocalized = animalTranslations[currentLang][bestClassNameRaw];
+    }
+
+    // Display Main Result Prominently
+    const mainResultDiv = document.createElement("div");
+    mainResultDiv.style.textAlign = "center";
+    mainResultDiv.style.marginBottom = "20px";
+    mainResultDiv.innerHTML = `
+        <h3 style="color: #ff6b6b; font-size: 1.5rem; margin-bottom: 5px;">
+            ${bestClassNameLocalized}
+        </h3>
+        <p style="color: #777; font-size: 0.9rem;">
+            ${(bestPrediction.probability * 100).toFixed(1)}%
+        </p>
+    `;
+    labelContainer.appendChild(mainResultDiv);
+
+    // Display Detailed Bars
     for (let i = 0; i < maxPredictions; i++) {
         const probability = (prediction[i].probability * 100).toFixed(1);
         const originalClassName = prediction[i].className;
