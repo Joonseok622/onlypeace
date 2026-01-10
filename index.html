@@ -5,11 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>오늘 뭐 먹지?</title>
     <link rel="stylesheet" href="style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638715085618009"
+     crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="top-controls">
         <button id="toggle-lang-btn" class="icon-btn" aria-label="Toggle Language">EN</button>
         <button id="toggle-theme-btn" class="icon-btn" aria-label="Toggle Theme">🌙</button>
+        <button id="animal-check-btn" class="icon-btn" aria-label="Check Animal Face">🐶</button>
+    </div>
+
+    <!-- Animal Face Modal -->
+    <div id="animal-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2 data-i18n="animal_title">🐶 동물상 확인</h2>
+            <div class="upload-area">
+                <input type="file" id="image-upload" accept="image/*" hidden>
+                <button id="upload-btn" class="secondary-btn" data-i18n="upload_btn">이미지 업로드</button>
+                <div id="image-preview-container">
+                    <img id="image-preview" src="#" alt="Preview" class="hidden" />
+                </div>
+            </div>
+            <div id="label-container" class="label-container"></div>
+            <div id="loading-msg" class="hidden">Loading Model...</div>
+        </div>
     </div>
 
     <div class="container">
@@ -69,6 +89,8 @@
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
         </section>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

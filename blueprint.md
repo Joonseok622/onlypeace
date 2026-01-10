@@ -17,12 +17,17 @@ This project is now a "Lunch Menu Recommender" for Korean office workers.
 *   Refactored into a Menu Recommender.
 *   **UI Update:** Moving theme toggle to top-right.
 *   **Feature:** Adding English/Korean language toggle.
+*   **Feature:** Added "Animal Face Check" (Teachable Machine) integration with image upload.
 
 ## Plan: UI/UX Improvements & Localization
 *   **Top Controls:**
     *   Move "Theme Toggle" to the top-right corner of the screen.
     *   Add "Language Toggle" (KO/EN) next to it.
-    *   Style them as small, unobtrusive buttons.
+    *   **Add "Animal Face Check" button.**
+*   **Teachable Machine Integration:**
+    *   Implement image upload capability (replacing webcam).
+    *   Display prediction results (Animal Face).
+    *   Use `./my_model/` as the model source.
 *   **Localization (i18n):**
     *   Update `index.html` with `data-i18n` attributes for text elements.
     *   Update `main.js` to manage language state ('ko'/'en').

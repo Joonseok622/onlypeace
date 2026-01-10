@@ -21,7 +21,9 @@ const translations = {
         label_message: "문의 내용",
         placeholder_message: "문의하실 내용을 적어주세요.",
         submit_btn: "문의하기",
-        lang_btn: "EN"
+        lang_btn: "EN",
+        animal_title: "🐶 동물상 확인",
+        upload_btn: "이미지 업로드"
     },
     en: {
         title: "🍚 What to Eat Today? 🍚",
@@ -35,7 +37,9 @@ const translations = {
         label_message: "Message",
         placeholder_message: "Please write your message here.",
         submit_btn: "Send Message",
-        lang_btn: "KO"
+        lang_btn: "KO",
+        animal_title: "🐶 Check Animal Face",
+        upload_btn: "Upload Image"
     }
 };
 
@@ -63,6 +67,21 @@ const menuList = [
     { name: '뚝배기 불고기', eng: 'Clay Pot Bulgogi', image: 'https://placehold.co/600x400/8e44ad/ffffff?text=Bulgogi' }
 ];
 
+// Modal & Teachable Machine Elements
+const animalCheckBtn = document.getElementById('animal-check-btn');
+const animalModal = document.getElementById('animal-modal');
+const closeModalBtn = document.getElementById('close-modal');
+const uploadBtn = document.getElementById('upload-btn');
+const imageInput = document.getElementById('image-upload');
+const imagePreview = document.getElementById('image-preview');
+const labelContainer = document.getElementById('label-container');
+const loadingMsg = document.getElementById('loading-msg');
+
+// Teachable Machine Config
+const URL_TM = "./my_model/";
+let model, maxPredictions;
+let isModelLoading = false;
+
 // Initialize
 updateLanguage(currentLang);
 
@@ -84,6 +103,92 @@ toggleLangBtn.addEventListener('click', () => {
 generatorBtn.addEventListener('click', () => {
     recommendMenu();
 });
+
+// Modal Interactions
+animalCheckBtn.addEventListener('click', async () => {
+    animalModal.classList.remove('hidden');
+    if (!model && !isModelLoading) {
+        await initModel();
+    }
+});
+
+closeModalBtn.addEventListener('click', () => {
+    animalModal.classList.add('hidden');
+});
+
+window.addEventListener('click', (e) => {
+    if (e.target === animalModal) {
+        animalModal.classList.add('hidden');
+    }
+});
+
+// Image Upload Logic
+uploadBtn.addEventListener('click', () => {
+    imageInput.click();
+});
+
+imageInput.addEventListener('change', function() {
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            imagePreview.src = e.target.result;
+            imagePreview.classList.remove('hidden');
+            predict();
+        }
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
+// Teachable Machine Logic
+async function initModel() {
+    isModelLoading = true;
+    loadingMsg.classList.remove('hidden');
+    const modelURL = URL_TM + "model.json";
+    const metadataURL = URL_TM + "metadata.json";
+
+    try {
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        loadingMsg.classList.add('hidden');
+        console.log("Model Loaded");
+    } catch (error) {
+        console.error("Error loading model:", error);
+        loadingMsg.textContent = "Error loading model. Please check ./my_model/";
+        // Fallback or Alert
+        alert("Failed to load the model. Make sure 'my_model' folder exists with model.json and metadata.json");
+    } finally {
+        isModelLoading = false;
+    }
+}
+
+async function predict() {
+    if (!model) {
+        console.warn("Model not loaded yet");
+        return;
+    }
+    
+    const prediction = await model.predict(imagePreview);
+    labelContainer.innerHTML = "";
+    
+    for (let i = 0; i < maxPredictions; i++) {
+        const probability = (prediction[i].probability * 100).toFixed(1);
+        const className = prediction[i].className;
+        
+        const div = document.createElement("div");
+        div.innerHTML = `<span>${className}</span>: <span style="font-weight:bold">${probability}%</span>`;
+        
+        // Simple visual bar
+        const bar = document.createElement("div");
+        bar.style.height = "5px";
+        bar.style.backgroundColor = "#ff6b6b";
+        bar.style.width = `${probability}%`;
+        bar.style.marginTop = "5px";
+        bar.style.borderRadius = "2px";
+        
+        div.appendChild(bar);
+        labelContainer.appendChild(div);
+    }
+}
 
 function updateLanguage(lang) {
     const t = translations[lang];
