@@ -8,6 +8,7 @@ body {
     align-items: center;
     min-height: 100vh;
     margin: 0;
+    padding: 20px 0;
 }
 
 .container {
@@ -111,6 +112,7 @@ button {
     gap: 15px;
     min-height: 70px;
     width: 100%;
+    margin-bottom: 20px;
 }
 
 .lotto-row {
@@ -156,5 +158,100 @@ button {
     }
 }
 
-/* 기존 pop-in 애니메이션은 개별 공에는 제거하거나 간소화 */
+/* Contact Form Styles */
+.separator {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 40px 0;
+    width: 100%;
+}
 
+.dark-mode .separator {
+    background-color: #4a4a4a;
+}
+
+.contact-section {
+    text-align: left;
+    width: 100%;
+}
+
+.contact-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    text-align: center;
+}
+
+.dark-mode .contact-section h2 {
+    color: #ecf0f1;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95em;
+}
+
+.dark-mode .form-group label {
+    color: #ccc;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s, background-color 0.3s;
+    box-sizing: border-box; /* Important for padding */
+    font-family: inherit;
+    background-color: #f9f9f9;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group textarea {
+    background-color: #3d3d3d;
+    border-color: #555;
+    color: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #4CAF50;
+    outline: none;
+    background-color: #fff;
+}
+
+.dark-mode .form-group input:focus,
+.dark-mode .form-group textarea:focus {
+    background-color: #4a4a4a;
+    border-color: #66bb6a;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #2196F3; /* Blue distinct from generator */
+    color: white;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(33, 150, 243, 0.3);
+}
+
+.submit-btn:hover {
+    background-color: #1e88e5;
+    box-shadow: 0 6px 8px rgba(33, 150, 243, 0.4);
+}
+
+.dark-mode .submit-btn {
+    background-color: #1976D2;
+}
+
+.dark-mode .submit-btn:hover {
+    background-color: #1565C0;
+}

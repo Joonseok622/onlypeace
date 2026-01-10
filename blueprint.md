@@ -1,17 +1,21 @@
-# Lotto Number Generator
+# Application Blueprint
 
-This project is a simple web application that generates random lottery numbers.
+This project currently serves as a hybrid application with a UI suggesting a "Menu Recommender" but underlying logic generating Lotto numbers.
 
-## Features
+## Current Features
+*   **Header:** Title "오늘 뭐 먹지?" (What to eat today?)
+*   **Action:** Button to generate "Menu Recommendations" (which outputs Lotto numbers).
+*   **Theme:** Dark mode support.
+*   **Display:** Visual "Lotto balls" for results.
 
-*   Generates 6 unique random numbers between 1 and 45.
-*   Displays the generated numbers in a visually appealing way.
-*   Includes a button to generate new numbers.
-*   Supports a dark mode theme.
+## Recent Changes
+*   Added `blueprint.md` to track project state.
+*   Added a Formspree partnership inquiry form.
 
-## Current Task
-
-*   **Improve Lotto Number Generator**
-    *   [x] Update `index.html` to improve the structure and content.
-    *   [x] Update `style.css` to enhance the visual design and add a dark mode.
-    *   [x] Update `main.js` to generate 6 unique numbers and handle theme toggling.
+## Plan: Add Partnership Inquiry Form
+*   **Goal:** Allow users to send partnership inquiries.
+*   **Implementation:**
+    *   Add a `<form>` element to `index.html` targeting `https://formspree.io/f/xjggboll`.
+    *   Include fields: Name, Email, Message.
+    *   Style the form to match the existing clean, modern aesthetic (with dark mode support).
+    *   Ensure the form is responsive and accessible.
