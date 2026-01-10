@@ -164,6 +164,22 @@ async function initModel() {
     }
 }
 
+// Animal Class Translations
+const animalTranslations = {
+    ko: {
+        "Dog": "강아지상",
+        "Cat": "고양이상",
+        "Bear": "곰상",
+        "Rabbit": "토끼상"
+    },
+    en: {
+        "Dog": "Puppy Face",
+        "Cat": "Cat Face",
+        "Bear": "Bear Face",
+        "Rabbit": "Rabbit Face"
+    }
+};
+
 async function predict() {
     if (!model) {
         console.warn("Model not loaded yet");
@@ -173,9 +189,22 @@ async function predict() {
     const prediction = await model.predict(imagePreview);
     labelContainer.innerHTML = "";
     
+    // Sort predictions by probability (descending)
+    prediction.sort((a, b) => b.probability - a.probability);
+
     for (let i = 0; i < maxPredictions; i++) {
         const probability = (prediction[i].probability * 100).toFixed(1);
-        const className = prediction[i].className;
+        const originalClassName = prediction[i].className;
+        
+        // Get localized class name, fallback to original if not found
+        let className = originalClassName;
+        if (animalTranslations[currentLang] && animalTranslations[currentLang][originalClassName]) {
+            className = animalTranslations[currentLang][originalClassName];
+        } else if (originalClassName === "Class 1") { // Fallback for default TM names if happened
+             className = currentLang === 'ko' ? "강아지상" : "Puppy Face";
+        } else if (originalClassName === "Class 2") {
+             className = currentLang === 'ko' ? "고양이상" : "Cat Face";
+        }
         
         const div = document.createElement("div");
         div.innerHTML = `<span>${className}</span>: <span style="font-weight:bold">${probability}%</span>`;
