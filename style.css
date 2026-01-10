@@ -106,34 +106,55 @@ button {
 
 .results-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     gap: 15px;
-    min-height: 70px; /* 공간 확보 */
+    min-height: 70px;
+    width: 100%;
+}
+
+.lotto-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 500px;
+    animation: slide-up 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.dark-mode .lotto-row {
+    background-color: rgba(255,255,255,0.05);
 }
 
 .result-number {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.5em;
+    font-size: 1.2em;
     font-weight: 800;
     border-radius: 50%;
     color: white;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
 }
 
-@keyframes pop-in {
+@keyframes slide-up {
     0% {
-        transform: scale(0) rotate(-180deg);
+        transform: translateY(20px);
         opacity: 0;
     }
     100% {
-        transform: scale(1) rotate(0deg);
+        transform: translateY(0);
         opacity: 1;
     }
 }
+
+/* 기존 pop-in 애니메이션은 개별 공에는 제거하거나 간소화 */
+
