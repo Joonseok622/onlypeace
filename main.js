@@ -1,9 +1,45 @@
 const generatorBtn = document.getElementById('generator-btn');
 const toggleThemeBtn = document.getElementById('toggle-theme-btn');
+const toggleLangBtn = document.getElementById('toggle-lang-btn');
 const recommendationContainer = document.getElementById('recommendation-container');
 const body = document.body;
 
-// 20 representative lunch menus for Korean office workers
+let currentLang = 'ko'; // 'ko' or 'en'
+let lastRecommendedMenu = null;
+
+// Translations Object
+const translations = {
+    ko: {
+        title: "🍚 오늘 뭐 먹지? 🍚",
+        subtitle: "버튼을 눌러 메뉴를 추천받아 보세요!",
+        recommend_btn: "메뉴 추천받기",
+        placeholder: "오늘 점심, 무엇을 먹을까요?",
+        contact_title: "🤝 제휴 문의",
+        label_name: "이름",
+        placeholder_name: "홍길동",
+        label_email: "이메일",
+        label_message: "문의 내용",
+        placeholder_message: "문의하실 내용을 적어주세요.",
+        submit_btn: "문의하기",
+        lang_btn: "EN"
+    },
+    en: {
+        title: "🍚 What to Eat Today? 🍚",
+        subtitle: "Click the button to get a lunch recommendation!",
+        recommend_btn: "Get Recommendation",
+        placeholder: "What should I eat for lunch today?",
+        contact_title: "🤝 Partnership Inquiry",
+        label_name: "Name",
+        placeholder_name: "John Doe",
+        label_email: "Email",
+        label_message: "Message",
+        placeholder_message: "Please write your message here.",
+        submit_btn: "Send Message",
+        lang_btn: "KO"
+    }
+};
+
+// 20 representative lunch menus
 const menuList = [
     { name: '김치찌개', eng: 'Kimchi Stew', image: 'https://placehold.co/600x400/e74c3c/ffffff?text=Kimchi+Jjigae' },
     { name: '된장찌개', eng: 'Soybean Paste Stew', image: 'https://placehold.co/600x400/d35400/ffffff?text=Doenjang+Jjigae' },
@@ -27,42 +63,80 @@ const menuList = [
     { name: '뚝배기 불고기', eng: 'Clay Pot Bulgogi', image: 'https://placehold.co/600x400/8e44ad/ffffff?text=Bulgogi' }
 ];
 
+// Initialize
+updateLanguage(currentLang);
+
 toggleThemeBtn.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
+    toggleThemeBtn.textContent = body.classList.contains('dark-mode') ? '☀️' : '🌙';
+});
+
+toggleLangBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'ko' ? 'en' : 'ko';
+    updateLanguage(currentLang);
+    
+    // If a menu is already recommended, update its text
+    if (lastRecommendedMenu) {
+        renderMenuCard(lastRecommendedMenu);
+    }
 });
 
 generatorBtn.addEventListener('click', () => {
     recommendMenu();
 });
 
-function recommendMenu() {
-    // Random selection
-    const randomIndex = Math.floor(Math.random() * menuList.length);
-    const selectedMenu = menuList[randomIndex];
+function updateLanguage(lang) {
+    const t = translations[lang];
+    document.documentElement.lang = lang;
+    
+    // Update simple text elements
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (t[key]) {
+            element.textContent = t[key];
+        }
+    });
 
-    // Clear previous result
+    // Update placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const key = element.getAttribute('data-i18n-placeholder');
+        if (t[key]) {
+            element.placeholder = t[key];
+        }
+    });
+
+    // Update Lang Button Text
+    toggleLangBtn.textContent = t.lang_btn;
+}
+
+function recommendMenu() {
+    const randomIndex = Math.floor(Math.random() * menuList.length);
+    lastRecommendedMenu = menuList[randomIndex];
+    renderMenuCard(lastRecommendedMenu);
+}
+
+function renderMenuCard(menu) {
     recommendationContainer.innerHTML = '';
 
-    // Create card element
     const card = document.createElement('div');
     card.classList.add('menu-card');
 
-    // Image
     const img = document.createElement('img');
-    img.src = selectedMenu.image;
-    img.alt = selectedMenu.name;
+    img.src = menu.image;
+    img.alt = currentLang === 'ko' ? menu.name : menu.eng;
     img.classList.add('menu-image');
 
-    // Text Content
     const content = document.createElement('div');
     content.classList.add('menu-content');
 
     const title = document.createElement('h3');
-    title.textContent = selectedMenu.name;
+    // Display Primary Language based on currentLang
+    title.textContent = currentLang === 'ko' ? menu.name : menu.eng;
     title.classList.add('menu-title');
 
     const subTitle = document.createElement('p');
-    subTitle.textContent = selectedMenu.eng;
+    // Display Secondary Language as subtitle
+    subTitle.textContent = currentLang === 'ko' ? menu.eng : menu.name;
     subTitle.classList.add('menu-subtitle');
 
     content.appendChild(title);

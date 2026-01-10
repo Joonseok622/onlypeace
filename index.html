@@ -7,37 +7,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="top-controls">
+        <button id="toggle-lang-btn" class="icon-btn" aria-label="Toggle Language">EN</button>
+        <button id="toggle-theme-btn" class="icon-btn" aria-label="Toggle Theme">🌙</button>
+    </div>
+
     <div class="container">
-        <h1>🍚 오늘 뭐 먹지? 🍚</h1>
-        <p>버튼을 눌러 메뉴를 추천받아 보세요!</p>
+        <h1 data-i18n="title">🍚 오늘 뭐 먹지? 🍚</h1>
+        <p data-i18n="subtitle">버튼을 눌러 메뉴를 추천받아 보세요!</p>
+        
         <div class="buttons">
-            <button id="generator-btn">메뉴 추천받기</button>
-            <button id="toggle-theme-btn">테마 변경</button>
+            <button id="generator-btn" data-i18n="recommend_btn">메뉴 추천받기</button>
         </div>
         
         <div id="recommendation-container" class="recommendation-container">
-            <!-- Recommendation will appear here -->
-            <div class="placeholder-text">오늘 점심, 무엇을 먹을까요?</div>
+            <div class="placeholder-text" data-i18n="placeholder">오늘 점심, 무엇을 먹을까요?</div>
         </div>
         
         <div class="separator"></div>
 
         <section class="contact-section">
-            <h2>🤝 제휴 문의</h2>
+            <h2 data-i18n="contact_title">🤝 제휴 문의</h2>
             <form action="https://formspree.io/f/xjggboll" method="POST">
                 <div class="form-group">
-                    <label for="name">이름</label>
-                    <input type="text" id="name" name="name" required placeholder="홍길동">
+                    <label for="name" data-i18n="label_name">이름</label>
+                    <input type="text" id="name" name="name" required placeholder="홍길동" data-i18n-placeholder="placeholder_name">
                 </div>
                 <div class="form-group">
-                    <label for="email">이메일</label>
+                    <label for="email" data-i18n="label_email">이메일</label>
                     <input type="email" id="email" name="email" required placeholder="email@example.com">
                 </div>
                 <div class="form-group">
-                    <label for="message">문의 내용</label>
-                    <textarea id="message" name="message" rows="4" required placeholder="문의하실 내용을 적어주세요."></textarea>
+                    <label for="message" data-i18n="label_message">문의 내용</label>
+                    <textarea id="message" name="message" rows="4" required placeholder="문의하실 내용을 적어주세요." data-i18n-placeholder="placeholder_message"></textarea>
                 </div>
-                <button type="submit" class="submit-btn">문의하기</button>
+                <button type="submit" class="submit-btn" data-i18n="submit_btn">문의하기</button>
             </form>
         </section>
 
