@@ -78,7 +78,7 @@ const labelContainer = document.getElementById('label-container');
 const loadingMsg = document.getElementById('loading-msg');
 
 // Teachable Machine Config
-const URL_TM = "./my_model/";
+const URL_TM = "https://teachablemachine.withgoogle.com/models/FcLIrlUBe/";
 let model, maxPredictions;
 let isModelLoading = false;
 
@@ -133,7 +133,10 @@ imageInput.addEventListener('change', function() {
         reader.onload = function(e) {
             imagePreview.src = e.target.result;
             imagePreview.classList.remove('hidden');
-            predict();
+            // Wait for image to load before predicting
+            imagePreview.onload = function() {
+                predict();
+            }
         }
         reader.readAsDataURL(this.files[0]);
     }
@@ -153,9 +156,9 @@ async function initModel() {
         console.log("Model Loaded");
     } catch (error) {
         console.error("Error loading model:", error);
-        loadingMsg.textContent = "Error loading model. Please check ./my_model/";
-        // Fallback or Alert
-        alert("Failed to load the model. Make sure 'my_model' folder exists with model.json and metadata.json");
+        loadingMsg.classList.remove('hidden');
+        loadingMsg.innerHTML = "모델을 불러오는데 실패했습니다.<br>네트워크 연결을 확인하거나 나중에 다시 시도해주세요.<br><br>Failed to load model. Please check your network connection.";
+        loadingMsg.style.color = "#ff6b6b";
     } finally {
         isModelLoading = false;
     }
