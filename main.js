@@ -164,19 +164,29 @@ async function initModel() {
     }
 }
 
-// Animal Class Translations
+// Animal Class Translations (Keys must be lowercase for case-insensitive matching)
 const animalTranslations = {
     ko: {
-        "Dog": "강아지상",
-        "Cat": "고양이상",
-        "Bear": "곰상",
-        "Rabbit": "토끼상"
+        "dog": "강아지상",
+        "cat": "고양이상",
+        "bear": "곰상",
+        "rabbit": "토끼상",
+        "dinosaur": "공룡상",
+        "class 1": "강아지상",
+        "class 2": "고양이상",
+        "class 3": "곰상",
+        "class 4": "토끼상"
     },
     en: {
-        "Dog": "Puppy Face",
-        "Cat": "Cat Face",
-        "Bear": "Bear Face",
-        "Rabbit": "Rabbit Face"
+        "dog": "Puppy Face",
+        "cat": "Cat Face",
+        "bear": "Bear Face",
+        "rabbit": "Rabbit Face",
+        "dinosaur": "Dino Face",
+        "class 1": "Puppy Face",
+        "class 2": "Cat Face",
+        "class 3": "Bear Face",
+        "class 4": "Rabbit Face"
     }
 };
 
@@ -196,14 +206,14 @@ async function predict() {
         const probability = (prediction[i].probability * 100).toFixed(1);
         const originalClassName = prediction[i].className;
         
-        // Get localized class name, fallback to original if not found
-        let className = originalClassName;
-        if (animalTranslations[currentLang] && animalTranslations[currentLang][originalClassName]) {
-            className = animalTranslations[currentLang][originalClassName];
-        } else if (originalClassName === "Class 1") { // Fallback for default TM names if happened
-             className = currentLang === 'ko' ? "강아지상" : "Puppy Face";
-        } else if (originalClassName === "Class 2") {
-             className = currentLang === 'ko' ? "고양이상" : "Cat Face";
+        // Normalize: trim whitespace and convert to lowercase
+        const normalizedClass = originalClassName.trim().toLowerCase();
+        
+        // Get localized class name
+        let className = originalClassName; // Default to original
+        
+        if (animalTranslations[currentLang] && animalTranslations[currentLang][normalizedClass]) {
+            className = animalTranslations[currentLang][normalizedClass];
         }
         
         const div = document.createElement("div");
