@@ -1,21 +1,26 @@
 # Application Blueprint
 
-This project currently serves as a hybrid application with a UI suggesting a "Menu Recommender" but underlying logic generating Lotto numbers.
+This project is now a "Lunch Menu Recommender" for Korean office workers.
 
 ## Current Features
 *   **Header:** Title "오늘 뭐 먹지?" (What to eat today?)
-*   **Action:** Button to generate "Menu Recommendations" (which outputs Lotto numbers).
+*   **Action:** Button to recommend a lunch menu.
 *   **Theme:** Dark mode support.
-*   **Display:** Visual "Lotto balls" for results.
 *   **Partnership:** Formspree contact form.
+*   **Community:** Disqus comments.
 
 ## Recent Changes
 *   Added `blueprint.md` to track project state.
 *   Added a Formspree partnership inquiry form.
 *   Added Disqus comments section.
+*   **Refactoring:** Converting from Lotto generator to Menu Recommender.
 
-## Plan: Add Disqus Comments
-*   **Goal:** Allow users to leave comments on the page.
-*   **Implementation:**
-    *   Add the provided Disqus embed code to `index.html` below the partnership form.
-    *   Ensure the comments section has appropriate spacing and visual integration.
+## Plan: Menu Recommender Implementation
+*   **Goal:** Suggest one of 20 popular lunch menus with an image.
+*   **Data:** List of 20 popular Korean lunch items (Kimchi Stew, Bibimbap, etc.).
+*   **Assets:** Generate realistic food images for each item using Nano Banana.
+*   **UI Updates:**
+    *   Update `index.html` to display a single large food card instead of lotto balls.
+    *   Update `main.js` to handle random selection from the menu list.
+    *   Update `style.css` for the new card layout.
+*   **Deployment:** Deploy to GitHub.

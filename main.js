@@ -1,55 +1,75 @@
 const generatorBtn = document.getElementById('generator-btn');
 const toggleThemeBtn = document.getElementById('toggle-theme-btn');
-const resultsContainer = document.getElementById('results-container');
+const recommendationContainer = document.getElementById('recommendation-container');
 const body = document.body;
 
-// 로또 공 색상 결정 함수 (한국 로또 기준)
-function getBallColor(number) {
-    if (number <= 10) return '#fbc400'; // 노랑
-    if (number <= 20) return '#69c8f2'; // 파랑
-    if (number <= 30) return '#ff7272'; // 빨강
-    if (number <= 40) return '#aaa';    // 회색
-    return '#b0d840';                   // 초록
-}
+// 20 representative lunch menus for Korean office workers
+const menuList = [
+    { name: '김치찌개', eng: 'Kimchi Stew', image: 'https://placehold.co/600x400/e74c3c/ffffff?text=Kimchi+Jjigae' },
+    { name: '된장찌개', eng: 'Soybean Paste Stew', image: 'https://placehold.co/600x400/d35400/ffffff?text=Doenjang+Jjigae' },
+    { name: '제육볶음', eng: 'Spicy Stir-fried Pork', image: 'https://placehold.co/600x400/c0392b/ffffff?text=Jeyuk+Bokkeum' },
+    { name: '칼국수', eng: 'Kalguksu', image: 'https://placehold.co/600x400/bdc3c7/2c3e50?text=Kalguksu' },
+    { name: '순두부찌개', eng: 'Soft Tofu Stew', image: 'https://placehold.co/600x400/e67e22/ffffff?text=Sundubu+Jjigae' },
+    { name: '자장면', eng: 'Jajangmyeon', image: 'https://placehold.co/600x400/2c3e50/ffffff?text=Jajangmyeon' },
+    { name: '짬뽕', eng: 'Jjamppong', image: 'https://placehold.co/600x400/c0392b/ffffff?text=Jjamppong' },
+    { name: '비빔밥', eng: 'Bibimbap', image: 'https://placehold.co/600x400/2ecc71/ffffff?text=Bibimbap' },
+    { name: '돈까스', eng: 'Pork Cutlet', image: 'https://placehold.co/600x400/f1c40f/2c3e50?text=Tonkatsu' },
+    { name: '김밥', eng: 'Gimbap', image: 'https://placehold.co/600x400/34495e/ffffff?text=Gimbap' },
+    { name: '부대찌개', eng: 'Budae Jjigae', image: 'https://placehold.co/600x400/e74c3c/ffffff?text=Budae+Jjigae' },
+    { name: '설렁탕', eng: 'Seolleongtang', image: 'https://placehold.co/600x400/ecf0f1/2c3e50?text=Seolleongtang' },
+    { name: '뼈해장국', eng: 'Pork Bone Hangover Soup', image: 'https://placehold.co/600x400/c0392b/ffffff?text=Haejangguk' },
+    { name: '갈비탕', eng: 'Galbitang', image: 'https://placehold.co/600x400/bdc3c7/2c3e50?text=Galbitang' },
+    { name: '떡볶이', eng: 'Tteokbokki', image: 'https://placehold.co/600x400/e74c3c/ffffff?text=Tteokbokki' },
+    { name: '라면', eng: 'Ramen', image: 'https://placehold.co/600x400/f39c12/ffffff?text=Ramen' },
+    { name: '볶음밥', eng: 'Fried Rice', image: 'https://placehold.co/600x400/f1c40f/2c3e50?text=Fried+Rice' },
+    { name: '만두국', eng: 'Dumpling Soup', image: 'https://placehold.co/600x400/ecf0f1/2c3e50?text=Mandu+Guk' },
+    { name: '냉면', eng: 'Naengmyeon', image: 'https://placehold.co/600x400/3498db/ffffff?text=Naengmyeon' },
+    { name: '뚝배기 불고기', eng: 'Clay Pot Bulgogi', image: 'https://placehold.co/600x400/8e44ad/ffffff?text=Bulgogi' }
+];
 
 toggleThemeBtn.addEventListener('click', () => {
     body.classList.toggle('dark-mode');
 });
 
 generatorBtn.addEventListener('click', () => {
-    // 기존 결과 지우기
-    resultsContainer.innerHTML = '';
-    
-    // 5게임 생성
-    for (let i = 0; i < 5; i++) {
-        createLottoRow(i);
-    }
+    recommendMenu();
 });
 
-function createLottoRow(delayIndex) {
-    // 1~45 사이의 중복 없는 숫자 6개 뽑기
-    const numbers = new Set();
-    while (numbers.size < 6) {
-        numbers.add(Math.floor(Math.random() * 45) + 1);
-    }
+function recommendMenu() {
+    // Random selection
+    const randomIndex = Math.floor(Math.random() * menuList.length);
+    const selectedMenu = menuList[randomIndex];
 
-    // 오름차순 정렬
-    const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+    // Clear previous result
+    recommendationContainer.innerHTML = '';
 
-    // 행(Row) 요소 생성
-    const rowEl = document.createElement('div');
-    rowEl.classList.add('lotto-row');
-    // 애니메이션 딜레이 설정 (각 줄이 순차적으로 나타남)
-    rowEl.style.animationDelay = `${delayIndex * 0.1}s`; 
+    // Create card element
+    const card = document.createElement('div');
+    card.classList.add('menu-card');
 
-    // 번호 공 생성 및 추가
-    sortedNumbers.forEach(number => {
-        const numberEl = document.createElement('div');
-        numberEl.classList.add('result-number');
-        numberEl.textContent = number;
-        numberEl.style.backgroundColor = getBallColor(number);
-        rowEl.appendChild(numberEl);
-    });
+    // Image
+    const img = document.createElement('img');
+    img.src = selectedMenu.image;
+    img.alt = selectedMenu.name;
+    img.classList.add('menu-image');
 
-    resultsContainer.appendChild(rowEl);
+    // Text Content
+    const content = document.createElement('div');
+    content.classList.add('menu-content');
+
+    const title = document.createElement('h3');
+    title.textContent = selectedMenu.name;
+    title.classList.add('menu-title');
+
+    const subTitle = document.createElement('p');
+    subTitle.textContent = selectedMenu.eng;
+    subTitle.classList.add('menu-subtitle');
+
+    content.appendChild(title);
+    content.appendChild(subTitle);
+    
+    card.appendChild(img);
+    card.appendChild(content);
+
+    recommendationContainer.appendChild(card);
 }

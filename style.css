@@ -72,15 +72,15 @@ button {
 }
 
 #generator-btn {
-    background-color: #4CAF50;
+    background-color: #ff6b6b; /* Warm color for food */
     color: white;
-    box-shadow: 0 4px 6px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 4px 6px rgba(255, 107, 107, 0.3);
 }
 
 #generator-btn:hover {
-    background-color: #45a049;
+    background-color: #ee5253;
     transform: translateY(-2px);
-    box-shadow: 0 6px 8px rgba(76, 175, 80, 0.4);
+    box-shadow: 0 6px 8px rgba(255, 107, 107, 0.4);
 }
 
 #generator-btn:active {
@@ -105,60 +105,82 @@ button {
     background-color: #5a5a5a;
 }
 
-.results-container {
+/* Menu Recommendation Styles */
+.recommendation-container {
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.placeholder-text {
+    font-size: 1.2rem;
+    color: #bdc3c7;
+    font-style: italic;
+}
+
+.menu-card {
+    background-color: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    min-height: 70px;
+}
+
+.dark-mode .menu-card {
+    background-color: #3d3d3d;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.menu-image {
     width: 100%;
-    margin-bottom: 20px;
+    height: 250px; /* Fixed height for consistency */
+    object-fit: cover;
+    display: block;
 }
 
-.lotto-row {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 10px;
-    background-color: rgba(0,0,0,0.03);
-    border-radius: 15px;
-    width: 100%;
-    max-width: 500px;
-    animation: slide-up 0.5s ease-out forwards;
-    opacity: 0;
+.menu-content {
+    padding: 20px;
+    text-align: center;
 }
 
-.dark-mode .lotto-row {
-    background-color: rgba(255,255,255,0.05);
+.menu-title {
+    font-size: 1.8em;
+    margin: 0 0 10px 0;
+    color: #2c3e50;
 }
 
-.result-number {
-    width: 45px;
-    height: 45px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2em;
-    font-weight: 800;
-    border-radius: 50%;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+.dark-mode .menu-title {
+    color: #ecf0f1;
 }
 
-@keyframes slide-up {
+.menu-subtitle {
+    font-size: 1.1em;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+.dark-mode .menu-subtitle {
+    color: #bdc3c7;
+}
+
+@keyframes pop-in {
     0% {
-        transform: translateY(20px);
         opacity: 0;
+        transform: scale(0.8);
     }
     100% {
-        transform: translateY(0);
         opacity: 1;
+        transform: scale(1);
     }
 }
 
-/* Contact Form Styles */
+/* Separator & Forms */
 .separator {
     height: 1px;
     background-color: #e0e0e0;
@@ -170,7 +192,7 @@ button {
     background-color: #4a4a4a;
 }
 
-.contact-section {
+.contact-section, .comments-section {
     text-align: left;
     width: 100%;
 }
@@ -224,7 +246,7 @@ button {
 
 .form-group input:focus,
 .form-group textarea:focus {
-    border-color: #4CAF50;
+    border-color: #ff6b6b; /* Matched to main button */
     outline: none;
     background-color: #fff;
 }
@@ -232,7 +254,7 @@ button {
 .dark-mode .form-group input:focus,
 .dark-mode .form-group textarea:focus {
     background-color: #4a4a4a;
-    border-color: #66bb6a;
+    border-color: #ff6b6b;
 }
 
 .submit-btn {
@@ -254,11 +276,4 @@ button {
 
 .dark-mode .submit-btn:hover {
     background-color: #1565C0;
-}
-
-/* Comments Section Styles */
-.comments-section {
-    width: 100%;
-    margin-top: 20px;
-    text-align: left;
 }
