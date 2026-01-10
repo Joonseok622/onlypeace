@@ -255,3 +255,10 @@ button {
 .dark-mode .submit-btn:hover {
     background-color: #1565C0;
 }
+
+/* Comments Section Styles */
+.comments-section {
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+}

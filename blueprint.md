@@ -7,15 +7,15 @@ This project currently serves as a hybrid application with a UI suggesting a "Me
 *   **Action:** Button to generate "Menu Recommendations" (which outputs Lotto numbers).
 *   **Theme:** Dark mode support.
 *   **Display:** Visual "Lotto balls" for results.
+*   **Partnership:** Formspree contact form.
 
 ## Recent Changes
 *   Added `blueprint.md` to track project state.
 *   Added a Formspree partnership inquiry form.
+*   Added Disqus comments section.
 
-## Plan: Add Partnership Inquiry Form
-*   **Goal:** Allow users to send partnership inquiries.
+## Plan: Add Disqus Comments
+*   **Goal:** Allow users to leave comments on the page.
 *   **Implementation:**
-    *   Add a `<form>` element to `index.html` targeting `https://formspree.io/f/xjggboll`.
-    *   Include fields: Name, Email, Message.
-    *   Style the form to match the existing clean, modern aesthetic (with dark mode support).
-    *   Ensure the form is responsive and accessible.
+    *   Add the provided Disqus embed code to `index.html` below the partnership form.
+    *   Ensure the comments section has appropriate spacing and visual integration.
