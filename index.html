@@ -42,6 +42,42 @@
     <link rel="canonical" href="https://onlypeace.site/">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+
+    <!-- JSON-LD Structured Data for GEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "오늘 뭐 먹지?",
+          "url": "https://onlypeace.site/",
+          "description": "점심 메뉴 추천 및 AI 동물상 테스트 서비스",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://onlypeace.site/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "오늘 뭐 먹지? - 점심 추천 & 동물상 테스트",
+          "operatingSystem": "Web",
+          "applicationCategory": "LifestyleApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW"
+          },
+          "description": "직장인을 위한 점심 메뉴 랜덤 추천 기능과 인공지능(AI) 기반 동물상 테스트 기능을 제공하는 무료 웹 애플리케이션입니다.",
+          "author": {
+            "@type": "Person",
+            "name": "OnlyPeace"
+          }
+        }
+      ]
+    }
+    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8638715085618009"
      crossorigin="anonymous"></script>
 </head>

@@ -21,6 +21,7 @@ This project is now a "Lunch Menu Recommender" for Korean office workers.
 *   **Analytics:** Added Google Analytics (gtag.js) and Microsoft Clarity.
 *   **UI:** Added Favicon (favicon.ico).
 *   **SEO:** Applied Google SEO policies (Meta tags, Open Graph, Semantic HTML, robots.txt, sitemap.xml).
+*   **GEO:** Added JSON-LD Structured Data (Schema.org) for AI search optimization.
 
 ## Plan: UI/UX Improvements & Localization
 *   **Top Controls:**
