@@ -18,6 +18,7 @@ This project is now a "Lunch Menu Recommender" for Korean office workers.
 *   **UI Update:** Moving theme toggle to top-right.
 *   **Feature:** Adding English/Korean language toggle.
 *   **Feature:** Added "Animal Face Check" (Teachable Machine) integration with image upload.
+*   **Analytics:** Added Google Analytics (gtag.js).
 
 ## Plan: UI/UX Improvements & Localization
 *   **Top Controls:**
