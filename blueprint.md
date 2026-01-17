@@ -19,6 +19,7 @@ This project is now a "Lunch Menu Recommender" for Korean office workers.
 *   **Feature:** Adding English/Korean language toggle.
 *   **Feature:** Added "Animal Face Check" (Teachable Machine) integration with image upload.
 *   **Analytics:** Added Google Analytics (gtag.js) and Microsoft Clarity.
+*   **UI:** Added Favicon (favicon.ico).
 
 ## Plan: UI/UX Improvements & Localization
 *   **Top Controls:**
