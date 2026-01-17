@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://joonseok622.github.io/onlypeace/sitemap.xml
